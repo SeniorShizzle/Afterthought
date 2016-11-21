@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tokenizer.h"
+#import "OperandStack.h"
 
 @interface ViewController : UIViewController
 

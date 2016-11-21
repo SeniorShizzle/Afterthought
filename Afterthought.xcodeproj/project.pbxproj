@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B29DC941DE2BA3F002FDE84 /* project_rpn.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B29DC931DE2BA3F002FDE84 /* project_rpn.txt */; };
+		5B29DC961DE2BA46002FDE84 /* project_test_quadratic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B29DC951DE2BA46002FDE84 /* project_test_quadratic.txt */; };
+		5B29DC991DE2BCA5002FDE84 /* OperandStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B29DC981DE2BCA5002FDE84 /* OperandStack.m */; };
+		5B29DC9C1DE2BD1B002FDE84 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B29DC9B1DE2BD1B002FDE84 /* Token.m */; };
+		5B29DC9F1DE2C2B7002FDE84 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B29DC9E1DE2C2B7002FDE84 /* Tokenizer.m */; };
+		5B29DCA31DE2EDFD002FDE84 /* project_test_symbols.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B29DCA21DE2EDFD002FDE84 /* project_test_symbols.txt */; };
+		5B29DCA61DE368CE002FDE84 /* DictionaryStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B29DCA51DE368CE002FDE84 /* DictionaryStack.m */; };
+		5B29DCA91DE36B35002FDE84 /* SystemDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B29DCA81DE36B35002FDE84 /* SystemDict.m */; };
 		5BAC5D011DE2B0E400BF6268 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D001DE2B0E400BF6268 /* main.m */; };
 		5BAC5D041DE2B0E400BF6268 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D031DE2B0E400BF6268 /* AppDelegate.m */; };
 		5BAC5D071DE2B0E400BF6268 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D061DE2B0E400BF6268 /* ViewController.m */; };
@@ -27,6 +35,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B29DC931DE2BA3F002FDE84 /* project_rpn.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = project_rpn.txt; sourceTree = "<group>"; };
+		5B29DC951DE2BA46002FDE84 /* project_test_quadratic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = project_test_quadratic.txt; sourceTree = "<group>"; };
+		5B29DC971DE2BCA5002FDE84 /* OperandStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperandStack.h; sourceTree = "<group>"; };
+		5B29DC981DE2BCA5002FDE84 /* OperandStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperandStack.m; sourceTree = "<group>"; };
+		5B29DC9A1DE2BD1B002FDE84 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
+		5B29DC9B1DE2BD1B002FDE84 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
+		5B29DC9D1DE2C2B7002FDE84 /* Tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tokenizer.h; sourceTree = "<group>"; };
+		5B29DC9E1DE2C2B7002FDE84 /* Tokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tokenizer.m; sourceTree = "<group>"; };
+		5B29DCA21DE2EDFD002FDE84 /* project_test_symbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = project_test_symbols.txt; sourceTree = "<group>"; };
+		5B29DCA41DE368CE002FDE84 /* DictionaryStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryStack.h; sourceTree = "<group>"; };
+		5B29DCA51DE368CE002FDE84 /* DictionaryStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryStack.m; sourceTree = "<group>"; };
+		5B29DCA71DE36B35002FDE84 /* SystemDict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemDict.h; sourceTree = "<group>"; };
+		5B29DCA81DE36B35002FDE84 /* SystemDict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemDict.m; sourceTree = "<group>"; };
 		5BAC5CFC1DE2B0E400BF6268 /* Afterthought.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Afterthought.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAC5D001DE2B0E400BF6268 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5BAC5D021DE2B0E400BF6268 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -85,6 +106,16 @@
 				5BAC5D031DE2B0E400BF6268 /* AppDelegate.m */,
 				5BAC5D051DE2B0E400BF6268 /* ViewController.h */,
 				5BAC5D061DE2B0E400BF6268 /* ViewController.m */,
+				5B29DC971DE2BCA5002FDE84 /* OperandStack.h */,
+				5B29DC981DE2BCA5002FDE84 /* OperandStack.m */,
+				5B29DCA41DE368CE002FDE84 /* DictionaryStack.h */,
+				5B29DCA51DE368CE002FDE84 /* DictionaryStack.m */,
+				5B29DCA71DE36B35002FDE84 /* SystemDict.h */,
+				5B29DCA81DE36B35002FDE84 /* SystemDict.m */,
+				5B29DC9D1DE2C2B7002FDE84 /* Tokenizer.h */,
+				5B29DC9E1DE2C2B7002FDE84 /* Tokenizer.m */,
+				5B29DC9A1DE2BD1B002FDE84 /* Token.h */,
+				5B29DC9B1DE2BD1B002FDE84 /* Token.m */,
 				5BAC5D081DE2B0E400BF6268 /* Main.storyboard */,
 				5BAC5D0B1DE2B0E400BF6268 /* Assets.xcassets */,
 				5BAC5D0D1DE2B0E400BF6268 /* LaunchScreen.storyboard */,
@@ -97,6 +128,9 @@
 		5BAC5CFF1DE2B0E400BF6268 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B29DCA21DE2EDFD002FDE84 /* project_test_symbols.txt */,
+				5B29DC951DE2BA46002FDE84 /* project_test_quadratic.txt */,
+				5B29DC931DE2BA3F002FDE84 /* project_rpn.txt */,
 				5BAC5D001DE2B0E400BF6268 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -197,7 +231,10 @@
 			files = (
 				5BAC5D0F1DE2B0E400BF6268 /* LaunchScreen.storyboard in Resources */,
 				5BAC5D0C1DE2B0E400BF6268 /* Assets.xcassets in Resources */,
+				5B29DCA31DE2EDFD002FDE84 /* project_test_symbols.txt in Resources */,
+				5B29DC961DE2BA46002FDE84 /* project_test_quadratic.txt in Resources */,
 				5BAC5D0A1DE2B0E400BF6268 /* Main.storyboard in Resources */,
+				5B29DC941DE2BA3F002FDE84 /* project_rpn.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,8 +252,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B29DCA91DE36B35002FDE84 /* SystemDict.m in Sources */,
+				5B29DC991DE2BCA5002FDE84 /* OperandStack.m in Sources */,
+				5B29DC9C1DE2BD1B002FDE84 /* Token.m in Sources */,
 				5BAC5D071DE2B0E400BF6268 /* ViewController.m in Sources */,
+				5B29DC9F1DE2C2B7002FDE84 /* Tokenizer.m in Sources */,
 				5BAC5D041DE2B0E400BF6268 /* AppDelegate.m in Sources */,
+				5B29DCA61DE368CE002FDE84 /* DictionaryStack.m in Sources */,
 				5BAC5D011DE2B0E400BF6268 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,6 +458,7 @@
 				5BAC5D201DE2B0E400BF6268 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5BAC5D211DE2B0E400BF6268 /* Build configuration list for PBXNativeTarget "AfterthoughtTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +467,7 @@
 				5BAC5D231DE2B0E400BF6268 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
