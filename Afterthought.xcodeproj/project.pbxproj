@@ -21,6 +21,7 @@
 		5B7B806D1DE563E000E106ED /* ExecutionStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7B806C1DE563E000E106ED /* ExecutionStack.m */; };
 		5B7B806F1DE572BB00E106ED /* flowcontrol.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B806E1DE572BB00E106ED /* flowcontrol.txt */; };
 		5B7B80711DE5915F00E106ED /* dicttest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80701DE5915F00E106ED /* dicttest.txt */; };
+		5B7B80731DE5A11C00E106ED /* Afterthought-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80721DE5A11C00E106ED /* Afterthought-Logo.png */; };
 		5BAC5D011DE2B0E400BF6268 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D001DE2B0E400BF6268 /* main.m */; };
 		5BAC5D041DE2B0E400BF6268 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D031DE2B0E400BF6268 /* AppDelegate.m */; };
 		5BAC5D071DE2B0E400BF6268 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D061DE2B0E400BF6268 /* ViewController.m */; };
@@ -61,6 +62,7 @@
 		5B7B806C1DE563E000E106ED /* ExecutionStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionStack.m; sourceTree = "<group>"; };
 		5B7B806E1DE572BB00E106ED /* flowcontrol.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flowcontrol.txt; sourceTree = "<group>"; };
 		5B7B80701DE5915F00E106ED /* dicttest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dicttest.txt; sourceTree = "<group>"; };
+		5B7B80721DE5A11C00E106ED /* Afterthought-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Afterthought-Logo.png"; sourceTree = SOURCE_ROOT; };
 		5BAC5CFC1DE2B0E400BF6268 /* Afterthought.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Afterthought.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAC5D001DE2B0E400BF6268 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5BAC5D021DE2B0E400BF6268 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		5BAC5CFF1DE2B0E400BF6268 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B7B80721DE5A11C00E106ED /* Afterthought-Logo.png */,
 				5B7B80691DE5517F00E106ED /* string_funcs.txt */,
 				5B7B80671DE5433900E106ED /* simple_funcs.txt */,
 				5B7B806E1DE572BB00E106ED /* flowcontrol.txt */,
@@ -256,6 +259,7 @@
 				5B7B80681DE5433900E106ED /* simple_funcs.txt in Resources */,
 				5B29DC961DE2BA46002FDE84 /* project_test_quadratic.txt in Resources */,
 				5B7B80711DE5915F00E106ED /* dicttest.txt in Resources */,
+				5B7B80731DE5A11C00E106ED /* Afterthought-Logo.png in Resources */,
 				5B7B806F1DE572BB00E106ED /* flowcontrol.txt in Resources */,
 				5B7B806A1DE5517F00E106ED /* string_funcs.txt in Resources */,
 				5BAC5D0A1DE2B0E400BF6268 /* Main.storyboard in Resources */,
