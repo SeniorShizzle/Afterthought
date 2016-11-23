@@ -16,6 +16,7 @@
     /// Stacks
     OperandStack *operandStack;
     DictionaryStack *dictionaryStack;
+    ExecutionStack *execStack;
 
 }
 
@@ -29,50 +30,18 @@
     // Do any additional setup after loading the view, typically from a nib.
 
     /// Set up the Stacks
-    operandStack = [OperandStack getInstance];
+    execStack = [ExecutionStack getInstance];
     dictionaryStack = [DictionaryStack getInstance];
+    operandStack = [OperandStack getInstance];
 
     parser = [[Tokenizer alloc] init];
 
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"string_funcs"
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"flowcontrol"
                                                      ofType:@"txt"];
 
     [parser loadFile:file];
-
-    Token *token = [parser nextToken];
-
-    SystemExecutionBlock runBlock;
-
-    while (token){
-
-        switch (token.tokenType) {
-            case Bool:
-            case Integer:
-            case Literal:
-            case Real:
-            case Block:
-            case Array:
-            case String:
-            case Mark:
-            case Dictionary:
-                [operandStack pushToken:token];
-                break;
-
-            case Executable:
-                // look up the executable in the dictionary stack
-                // and follow the commands in that stack
-                runBlock = [dictionaryStack blockForExecutable:token];
-                if (runBlock) {
-                    runBlock();
-                }
-                break;
-
-        }
-
-        token = [parser nextToken];
-    }
-
-    NSLog(@"Stack:\n %@", operandStack);
+    [execStack pushContext:parser];
+    [execStack run];
 
 }
 

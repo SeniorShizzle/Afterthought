@@ -1,0 +1,18 @@
+1
+2
+3
+pstack
+{4 5 6 pstack}
+beepboop
+exec
+5 5 eq {clear} if
+1 2 3
+pstack
+% pause
+4 5 6
+pstack
+(Starting loop)
+2 4 {dup 2 mul} repeat % should keep doubling the number
+pstack
+(Finished with that)
+0 5 20 {dup pop} for

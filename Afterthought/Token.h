@@ -39,5 +39,6 @@ typedef NS_ENUM(NSInteger, TokenType){
 + (NSString *) tokenTypeString:(TokenType)type;
 
 - (NSComparisonResult) compareTo:(Token *)other;
+- (NSString *) descriptionForStack;
 
 @end

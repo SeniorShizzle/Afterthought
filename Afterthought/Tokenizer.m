@@ -134,7 +134,7 @@
                 filePosition++; // find the first non-space character
             }
 
-            filePosition--; // one space back to account for the non-whitespace character we landed on
+            if (currentCharacter == ' ' || currentCharacter == '\n') filePosition--; // one space back to account for the non-whitespace character we landed on
             
             break;
     }

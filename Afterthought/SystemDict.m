@@ -8,17 +8,22 @@
 
 #import "SystemDict.h"
 #import "OperandStack.h"
+#import "ExecutionStack.h"
+#import "DictionaryStack.h"
 
 @implementation SystemDict
 
 + (NSDictionary *)systemDictionary {
-    NSMutableArray *blocks = [NSMutableArray arrayWithCapacity:30];
-    NSMutableArray *keys    = [NSMutableArray arrayWithCapacity:30];
+    NSMutableArray *blocks  = [NSMutableArray arrayWithCapacity:200];
+    NSMutableArray *keys    = [NSMutableArray arrayWithCapacity:200];
 
-    __block OperandStack *opStack = [OperandStack getInstance];  // declaring as block-accessible makes it easier
+    __block OperandStack *opStack      = [OperandStack getInstance];  // declaring as block-accessible makes it easier
+    __block ExecutionStack *execStack  = [ExecutionStack getInstance];
+    //    __block DictionaryStack *dictStack = [DictionaryStack getInstance];
 
 
 # pragma mark - Arithmetic Operations
+
 
     /// ADD
     // a b add c
@@ -41,6 +46,7 @@
         }
 
     }];
+
 
     /// SUB
     // a b sub c
@@ -153,29 +159,6 @@
             [opStack pushToken:[Token tokenWithReal:[NSNumber numberWithFloat:fmod(x, y)]]];
         }
         
-    }];
-
-
-    /// IDIV
-    // a b idiv (int)c
-    [keys addObject:[Token tokenFromString:@"idiv"]];
-    [blocks addObject:^{
-        Token *b = [opStack pop];
-        Token *a = [opStack pop];
-
-        if ([b tokenType] == Integer && [a tokenType] == Integer){
-            NSInteger x = [(NSNumber *)a.value integerValue];
-            NSInteger y = [(NSNumber *)b.value integerValue];
-
-            [opStack pushToken:[Token tokenWithInteger:x / y]];
-
-        } else {
-            NSInteger x = [(NSNumber *)[a value] integerValue];
-            NSInteger y = [(NSNumber *)[b value] integerValue];
-
-            [opStack pushToken:[Token tokenWithInteger:x / y]];
-        }
-
     }];
 
 
@@ -445,14 +428,14 @@
     }];
 
 
-    /// TRUNCATE
-    // a truncate b
-    [keys addObject:[Token tokenFromString:@"truncate"]];
+    /// FLOOR
+    // a floor b
+    [keys addObject:[Token tokenFromString:@"floor"]];
     [blocks addObject:^{
         Token *a = [opStack pop];
 
         if ([a tokenType] != Integer && [a tokenType] != Real){
-            [NSException raise:@"Malformed Input" format:@"Attempted to call truncate on non-number %@", a];
+            [NSException raise:@"Malformed Input" format:@"Attempted to call floor on non-number %@", a];
         }
 
         if ([a tokenType] == Integer){
@@ -464,29 +447,42 @@
 
             float x = [(NSNumber *)[a value] floatValue];
 
-            [opStack pushToken:[Token tokenWithReal:[NSNumber numberWithFloat:truncf(x)]]];
+            [opStack pushToken:[Token tokenWithReal:[NSNumber numberWithFloat:floorf(x)]]];
+        }
+        
+    }];
+
+
+    /// ROUND
+    // a round b
+    [keys addObject:[Token tokenFromString:@"round"]];
+    [blocks addObject:^{
+        Token *a = [opStack pop];
+
+        if ([a tokenType] != Integer && [a tokenType] != Real){
+            [NSException raise:@"Malformed Input" format:@"Attempted to call round on non-number %@", a];
+        }
+
+        if ([a tokenType] == Integer){
+
+            // don't have to do anything for integers
+            [opStack pushToken:a];
+
+        } else {
+
+            float x = [(NSNumber *)[a value] floatValue];
+
+            [opStack pushToken:[Token tokenWithReal:[NSNumber numberWithFloat:roundf(x)]]];
         }
         
     }];
 
 
 
+    /// All methods implemented
+
+
 # pragma mark - Stack Operations
-
-    /// PSTACK
-    // - pstack -
-    [keys addObject:[Token tokenWithExecutable:@"pstack"]];
-    [blocks addObject:^{
-        NSLog(@"%@", opStack);
-    }];
-
-
-    /// =
-    // a = -
-    [keys addObject:[Token tokenWithExecutable:@"="]];
-    [blocks addObject:^{
-        NSLog(@"%@", [opStack pop]);
-    }];
 
 
     /// DUP
@@ -641,6 +637,44 @@
     }];
 
 
+    /// All methods implemented
+
+# pragma mark - Array & Dictionary Operations
+
+
+    /// DEF
+    // key value def -
+    [keys addObject:[Token tokenWithExecutable:@"def"]];
+    [blocks addObject:^{
+
+        Token *v = [opStack pop];
+        Token *k = [opStack pop];
+
+        if (k.tokenType != Literal || v.tokenType == Literal) {
+            [NSException raise:@"Malformed Input" format:@"command \"def\" expects a Literal and <Any> but was given %@, %@", k, v];
+        }
+
+        Token *key = [Token tokenWithExecutable:(NSString *)k.value];
+        Token *val;
+
+        switch (k.tokenType) {
+            case Bool:
+            case Integer:
+            case Real:
+            case Executable:
+                val = [v copy];
+                break;
+
+        }
+
+    }];
+
+
+
+
+    /// No methods implemented
+
+
 # pragma mark - String Operations
 
     /// STRING
@@ -725,7 +759,10 @@
     }];
 
 
-# pragma mark - Bit and Boolean Operators
+    /// Not Implemented: TOKEN, SEARCH, ANCHORSEARCH, FORALL, COPY, PUTINTERVAL, GETINTERVAL
+
+
+# pragma mark - Bit & Boolean Operators
 
     /// EQ
     // a b eq bool
@@ -766,7 +803,7 @@
         Token *b = [opStack pop];
         Token *a = [opStack pop];
 
-        if (!(a.tokenType == String || a.tokenType != Integer) || !(b.tokenType == String || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
+        if (!(a.tokenType == String || a.tokenType == Integer) || !(b.tokenType == String || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
             [NSException raise:@"Malformed Input" format:@"command \"ge\" expects 2 of same (String or Integer) but was given %@, %@", a, b];
         }
 
@@ -796,7 +833,7 @@
         Token *b = [opStack pop];
         Token *a = [opStack pop];
 
-        if (!(a.tokenType == String || a.tokenType != Integer) || !(b.tokenType == String || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
+        if (!(a.tokenType == String || a.tokenType == Integer) || !(b.tokenType == String || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
             [NSException raise:@"Malformed Input" format:@"command \"gt\" expects 2 of same (String or Integer) but was given %@, %@", a, b];
         }
 
@@ -826,7 +863,7 @@
         Token *b = [opStack pop];
         Token *a = [opStack pop];
 
-        if (!(a.tokenType == String || a.tokenType != Integer) || !(b.tokenType == String || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
+        if (!(a.tokenType == String || a.tokenType == Integer) || !(b.tokenType == String || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
             [NSException raise:@"Malformed Input" format:@"command \"le\" expects 2 of same (String or Integer) but was given %@, %@", a, b];
         }
 
@@ -856,7 +893,7 @@
         Token *b = [opStack pop];
         Token *a = [opStack pop];
 
-        if (!(a.tokenType == String || a.tokenType != Integer) || !(b.tokenType == String || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
+        if (!(a.tokenType == String || a.tokenType == Integer) || !(b.tokenType == String || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
             [NSException raise:@"Malformed Input" format:@"command \"le\" expects 2 of same (String or Integer) but was given %@, %@", a, b];
         }
 
@@ -886,8 +923,8 @@
         Token *b = [opStack pop];
         Token *a = [opStack pop];
 
-        if (!(a.tokenType == Bool || a.tokenType != Integer) || !(b.tokenType == Bool || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
-            [NSException raise:@"Malformed Input" format:@"command \"le\" expects 2 of same (Boolean or Integer) but was given %@, %@", a, b];
+        if (!(a.tokenType == Bool || a.tokenType == Integer) || !(b.tokenType == Bool || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
+            [NSException raise:@"Malformed Input" format:@"command \"and\" expects 2 of same (Boolean or Integer) but was given %@, %@", a, b];
         }
 
         if (a.tokenType == Bool){
@@ -921,7 +958,7 @@
         Token *b = [opStack pop];
         Token *a = [opStack pop];
 
-        if (!(a.tokenType == Bool || a.tokenType != Integer) || !(b.tokenType == Bool || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
+        if (!(a.tokenType == Bool || a.tokenType == Integer) || !(b.tokenType == Bool || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
             [NSException raise:@"Malformed Input" format:@"command \"or\" expects 2 of same (Boolean or Integer) but was given %@, %@", a, b];
         }
 
@@ -956,7 +993,7 @@
         Token *b = [opStack pop];
         Token *a = [opStack pop];
 
-        if (!(a.tokenType == Bool || a.tokenType != Integer) || !(b.tokenType == Bool || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
+        if (!(a.tokenType == Bool || a.tokenType == Integer) || !(b.tokenType == Bool || b.tokenType == Integer) || (a.tokenType != b.tokenType)){
             [NSException raise:@"Malformed Input" format:@"command \"xor\" expects 2 of same (Boolean or Integer) but was given %@, %@", a, b];
         }
 
@@ -1033,6 +1070,8 @@
 
     }];
 
+    /// All methods implemented.
+
 
 # pragma mark - Flow Control Operations
 
@@ -1040,14 +1079,22 @@
     // a exec -
     [keys addObject:[Token tokenFromString:@"exec"]];
     [blocks addObject:^{
-        Token *b = [opStack pop];
         Token *a = [opStack pop];
 
-        if ([a isEqual:b]) {
-            [opStack pushToken:[Token tokenWithBool:YES]];
-        } else {
-            [opStack pushToken:[Token tokenWithBool:NO]];
+        if (a.tokenType != Block && a.tokenType != Executable) {
+            [NSException raise:@"Malformed Input" format:@"command \"exec\" expects Block or Executable but was given %@", a];
         }
+
+        if (a.tokenType == Block){
+            Tokenizer *context = [[Tokenizer alloc] init];
+            [context loadString:(NSString *)a.value]; // load the code into the interpreter
+
+            [execStack pushContext:context]; // load the new context onto execution stack
+            [execStack run]; // begin execution of the code block immediately
+
+        }
+
+        // Otherwise, we'll ignore this command. Not implemented below Language Level 2
 
     }];
 
@@ -1056,13 +1103,264 @@
     // - exit -
     [keys addObject:[Token tokenFromString:@"exit"]];
     [blocks addObject:^{
-        //TODO: Exit the innermost loop
+        [execStack popAndResumeExecution]; // easy enough. we'll leave the stack unchanged because that's the programmer's job
     }];
 
 
+    /// QUIT
+    // - quit -
+    [keys addObject:[Token tokenFromString:@"quit"]];
+    [blocks addObject:^{
+        [execStack quit]; // easy enough
+    }];
 
 
+    /// START
+    // - start -
+    [keys addObject:[Token tokenFromString:@"start"]];
+    [blocks addObject:^{
+        [execStack run]; // easy enough
+    }];
 
+
+    /// PAUSE (not official language keyword)
+    // - pause -
+    [keys addObject:[Token tokenFromString:@"pause"]];
+    [blocks addObject:^{
+        [execStack pause]; // easy enough
+    }];
+
+
+    /// STOP (uncertain implementation/not well defined)
+    // - stop -
+    [keys addObject:[Token tokenFromString:@"stop"]];
+    [blocks addObject:^{
+        [execStack pause]; // easy enough
+    }];
+
+    /// COUNTEXECSTACK
+    // - countexecstack n
+    [keys addObject:[Token tokenFromString:@"countexecstack"]];
+    [blocks addObject:^{
+
+        NSInteger height = [execStack size];
+        [opStack pushToken:[Token tokenWithInteger:height]];
+
+    }];
+
+
+    /// IF
+    // bool proc if -
+    [keys addObject:[Token tokenFromString:@"if"]];
+    [blocks addObject:^{
+        Token *b = [opStack pop];
+        Token *a = [opStack pop];
+
+        if (a.tokenType != Bool || b.tokenType != Block) {
+            [NSException raise:@"Malformed Input" format:@"command \"if\" expects Bool, Block but was given %@, %@", a, b];
+        }
+
+        bool shouldRun = [(NSNumber *)a.value boolValue];
+
+        if (shouldRun){
+            Tokenizer *context = [[Tokenizer alloc] init];
+            [context loadString:(NSString *)b.value]; // load the code into the interpreter
+
+            [execStack pushContext:context]; // load the new context onto execution stack
+            [execStack run]; // begin execution of the code block immediately
+        }
+        
+    }];
+
+
+    /// IFELSE
+    // bool proc proc ifelse -
+    [keys addObject:[Token tokenFromString:@"ifelse"]];
+    [blocks addObject:^{
+        Token *c = [opStack pop];
+        Token *b = [opStack pop];
+        Token *a = [opStack pop];
+
+        if (a.tokenType != Bool || a.tokenType != Block || c.tokenType != Block) {
+            [NSException raise:@"Malformed Input" format:@"command \"ifelse\" expects Bool, Block, Block but was given %@, %@, %@", a, b, c];
+        }
+
+        bool shouldRunA = [(NSNumber *)a.value boolValue];
+
+        Tokenizer *context = [[Tokenizer alloc] init];
+        if (shouldRunA) [context loadString:(NSString *)b.value]; // load the code into the interpreter
+        else [context loadString:(NSString *)b.value];
+
+        [execStack pushContext:context]; // load the new context onto execution stack
+        [execStack run]; // begin execution of the code block immediately
+        
+    }];
+
+
+    /// FOR
+    // j k l bloc for -
+    [keys addObject:[Token tokenFromString:@"for"]];
+    [blocks addObject:^{
+        Token *d = [opStack pop]; // executable
+        Token *c = [opStack pop]; // limit
+        Token *b = [opStack pop]; // increment
+        Token *a = [opStack pop]; // initial
+
+        if (a.tokenType != Integer || a.tokenType != Integer || c.tokenType != Integer || d.tokenType != Block) {
+            [NSException raise:@"Malformed Input" format:@"command \"for\" expects Int, Int, Int, Block but was given %@, %@, %@, %@", a, b, c, d];
+        }
+
+        NSInteger initial = [(NSNumber *)a.value integerValue];
+        NSInteger increment = [(NSNumber *)b.value integerValue];
+        NSInteger limit = [(NSNumber *)c.value integerValue];
+
+        if (increment > 0 && limit < initial) { // the limit is smaller than the start, with positive increment.
+            [NSException raise:@"Out Of Range Exception"
+                        format:@"For a positive increment, the boundary limit must exceed the initial value. Passed: %ld, %ld", initial, limit];
+        }
+        if (increment < 0 && limit > initial) { // the limit is smaller than the start, with positive increment.
+            [NSException raise:@"Out Of Range Exception"
+                        format:@"For a negative increment, the initial value must exceed the boundary limit. Passed: %ld, %ld", initial, limit];
+        }
+
+        Tokenizer *context = [[Tokenizer alloc] init];
+
+        if (increment > 0) { // positive increment
+
+            for (NSInteger i = initial; i < limit; i += increment){ // this will handle negative and positive increments
+                [opStack pushToken:[Token tokenWithInteger:i]]; // place a copy of the result into the stack
+
+                [context loadString:(NSString *)d.value];
+
+                [execStack pushContext:context]; // load the new context onto execution stack
+                [execStack run]; // begin execution of the code block immediately
+            }
+
+        } else { // will also capture when increment == 0, or infinite loop
+
+            for (NSInteger i = initial; i > limit; i += increment){ // this will handle negative and positive increments
+                [opStack pushToken:[Token tokenWithInteger:i]]; // place a copy of the result into the stack
+
+                [context loadString:(NSString *)d.value];
+
+                [execStack pushContext:context]; // load the new context onto execution stack
+                [execStack run]; // begin execution of the code block immediately
+            }
+        }
+
+    }];
+
+
+    /// LOOP
+    // block loop -
+    [keys addObject:[Token tokenFromString:@"loop"]];
+    [blocks addObject:^{
+        Token *a = [opStack pop];
+
+        if (a.tokenType != Block && a.tokenType != Executable) {
+            [NSException raise:@"Malformed Input" format:@"command \"loop\" expects Block or Executable but was given %@", a];
+        }
+
+        if (a.tokenType == Block){
+
+            Tokenizer *context = [[Tokenizer alloc] init];
+
+            while (true) { // loop is infinite; must be broken manually
+                [context loadString:(NSString *)a.value]; // load the code into the interpreter
+
+                [execStack pushContext:context]; // load the new context onto execution stack
+                [execStack run]; // begin execution of the code block immediately
+            }
+        }
+
+        // Otherwise, we'll ignore this command. Not implemented below Language Level 2
+        
+    }];
+
+
+    /// REPEAT
+    // n proc repeat -
+    [keys addObject:[Token tokenFromString:@"repeat"]];
+    [blocks addObject:^{
+        Token *b = [opStack pop];
+        Token *a = [opStack pop];
+
+        if (!(b.tokenType == Block || b.tokenType == Executable) || a.tokenType != Integer) {
+            [NSException raise:@"Malformed Input" format:@"command \"repeat\" expects Integer, Block but was given %@, %@", a, b];
+        }
+
+        int repeatCount = [(NSNumber *)a.value intValue];
+
+        Tokenizer *context = [[Tokenizer alloc] init];
+
+        for (int i = 0; i < repeatCount; i++) {
+            [context loadString:(NSString *)b.value]; // load the code into the interpreter
+
+            [execStack pushContext:context]; // load the new context onto execution stack
+            [execStack run]; // begin execution of the code block immediately
+        }
+        
+    }];
+
+
+    /// Not implemented: EXECSTACK, STOPPED
+
+
+# pragma mark - Types & Conversion Operations
+
+
+    /// None implemented
+
+
+# pragma mark - File Operations
+
+
+    /// PSTACK
+    // - pstack -
+    [keys addObject:[Token tokenWithExecutable:@"pstack"]];
+    [blocks addObject:^{
+        NSLog(@"%@", opStack);
+    }];
+
+
+    /// =
+    // a = -
+    [keys addObject:[Token tokenWithExecutable:@"="]];
+    [blocks addObject:^{
+        NSLog(@"%@", [opStack pop]);
+    }];
+
+
+    /// Most not implemented
+
+
+# pragma mark - Graphics Operations
+
+
+    /// None implemented
+
+
+# pragma mark - Matrix Operations
+
+
+    /// None implemented
+
+
+# pragma mark - Path Operations
+
+
+    /// None implemented
+
+
+# pragma mark - Set Up & Miscellaneous Operations
+
+
+    /// None implemented
+
+
+# pragma mark - Font Operations
+
+    /// None implemented
 
 
     // compile all of the blocks and keys into the

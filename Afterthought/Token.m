@@ -83,7 +83,7 @@
 
     if ([string characterAtIndex:0] == '{'){
         _tokenType = Block;
-        _value = string;
+        _value = [string substringWithRange:NSMakeRange(1, [string length] - 2)];
 
         return self;
     }
@@ -104,7 +104,7 @@
 
     if ([string characterAtIndex:0] == '<'){
         _tokenType = Array;
-        _value = string;
+        _value = [string substringWithRange:NSMakeRange(1, [string length] - 2)];
 
         return self;
     }
@@ -236,16 +236,25 @@
     return [[Token alloc] initWithType:_tokenType andValue:[_value copy]];
 }
 
+- (NSString *) descriptionForStack {
+    NSString *retString = [self description]; //[NSString stringWithFormat:@"%@", [_value description], [Token tokenTypeString:_tokenType]];
+
+    retString = [retString stringByPaddingToLength:40 withString:@" " startingAtIndex:0];
+    retString = [retString stringByAppendingString:[NSString stringWithFormat:@"(%@)", [Token tokenTypeString:_tokenType]]];
+    return retString;
+}
+
 - (NSString *) description {
-    NSString *retString = [_value description]; //[NSString stringWithFormat:@"%@", [_value description], [Token tokenTypeString:_tokenType]];
+
+    if (_tokenType == Bool) return [(NSNumber *)_value boolValue] ? @"True" : @"False";
+
+    NSString *retString = [_value description];
     retString = [retString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 
     if ([retString length] > 40){
         retString = [NSString stringWithFormat:@"---- %@ Too Long ----", [Token tokenTypeString:_tokenType]];
     }
 
-    retString = [retString stringByPaddingToLength:40 withString:@" " startingAtIndex:0];
-    retString = [retString stringByAppendingString:[NSString stringWithFormat:@"(%@)", [Token tokenTypeString:_tokenType]]];
     return retString;
 }
 

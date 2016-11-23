@@ -20,3 +20,13 @@
 
 rand
 
+true false and
+
+true true and
+
+true false xor
+
+10 100 and
+
+1 1 and
+

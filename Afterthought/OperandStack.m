@@ -21,9 +21,7 @@ static OperandStack *instance;
 
 - (instancetype)init {
 
-    if (instance) { // attempting to call 'init' on singleton
-        @throw [NSException exceptionWithName:@"Already Instantiated" reason:@"Access OperandStack singleton with the -getInstance method" userInfo:nil];
-    }
+    if (instance) return instance;
 
 
     self = [super init];
@@ -135,7 +133,7 @@ static OperandStack *instance;
     [retString appendString:@"\n##### TOP #####\n\n"];
 
     for (int i = (int)currentIndex ; i >= 0; i--) {
-        [retString appendString:[NSString stringWithFormat:@"\t%@\n", [stack objectAtIndex:i]]];
+        [retString appendString:[NSString stringWithFormat:@"\t%@\n", [[stack objectAtIndex:i] descriptionForStack]]];
     }
 
     [retString appendString:@"\n##### BOTTOM #####\n"];

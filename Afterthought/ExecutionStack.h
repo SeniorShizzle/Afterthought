@@ -21,5 +21,10 @@
 
 - (void) popAndResumeExecution;
 - (void) pushContext:(Tokenizer *)context;
+- (void) run;
+- (void) pause;
+- (void) quit;
+
+- (NSInteger) size;
 
 @end
