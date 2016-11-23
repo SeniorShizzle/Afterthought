@@ -19,7 +19,7 @@
 
     __block OperandStack *opStack      = [OperandStack getInstance];  // declaring as block-accessible makes it easier
     __block ExecutionStack *execStack  = [ExecutionStack getInstance];
-    //    __block DictionaryStack *dictStack = [DictionaryStack getInstance];
+    __block DictionaryStack *dictStack = [DictionaryStack getInstance];
 
 
 # pragma mark - Arithmetic Operations
@@ -655,17 +655,9 @@
         }
 
         Token *key = [Token tokenWithExecutable:(NSString *)k.value];
-        Token *val;
+        Token *val = [v copy];
 
-        switch (k.tokenType) {
-            case Bool:
-            case Integer:
-            case Real:
-            case Executable:
-                val = [v copy];
-                break;
-
-        }
+        [dictStack setToken:val forKey:key]; // add the k,v to the user dictionary
 
     }];
 

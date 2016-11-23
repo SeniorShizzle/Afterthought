@@ -31,12 +31,10 @@
 
     /// Set up the Stacks
     execStack = [ExecutionStack getInstance];
-    dictionaryStack = [DictionaryStack getInstance];
-    operandStack = [OperandStack getInstance];
 
     parser = [[Tokenizer alloc] init];
 
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"flowcontrol"
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"dicttest"
                                                      ofType:@"txt"];
 
     [parser loadFile:file];

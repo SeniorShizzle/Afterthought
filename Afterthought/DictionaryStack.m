@@ -44,36 +44,49 @@ static DictionaryStack *sharedInstance;
 
     self = [super init];
     if (self) {
-        stack = [[NSMutableArray alloc] initWithCapacity:5];
-        systemDict = [SystemDict systemDictionary];
-        [stack addObject:systemDict];
-
-        // add the global dictionary
-        [stack addObject:[NSMutableDictionary dictionaryWithCapacity:1024]];
-
-        // add the user dictionary
-        [stack addObject:[NSMutableDictionary dictionaryWithCapacity:1024]];
-
-        currentIndex = 2;
-
     }
     return self;
+}
+
+- (void) setup {
+    stack = [[NSMutableArray alloc] initWithCapacity:5];
+
+    // add the system dictionary
+    systemDict = [SystemDict systemDictionary];
+    [stack addObject:systemDict];
+
+    // add the global dictionary
+    [stack addObject:[NSMutableDictionary dictionaryWithCapacity:1024]];
+
+    // add the user dictionary
+    [stack addObject:[NSMutableDictionary dictionaryWithCapacity:1024]];
+
+    currentIndex = 2;
+
 }
 
 # pragma mark - Dictionary Methods
 
 - (void)setToken:(Token *)value forKey:(Token *)key {
-    NSMutableDictionary *topUserDict = [stack objectAtIndex:currentIndex];
+
+    if (!stack) [self setup];
+     
+    NSMutableDictionary *topUserDict = [stack lastObject];
 
     [topUserDict setObject:value forKey:key];
 }
 
 - (void)addUserDictionaryToStack:(NSDictionary *)userDict {
+    if (!stack) [self setup];
+
     [stack addObject:userDict];
     currentIndex++;
 }
 
 - (SystemExecutionBlock)blockForExecutable:(Token *)executable {
+
+    if (!stack) [self setup];
+
 
     if (executable.tokenType != Executable) {
         [NSException raise:@"Illegal Operation on Non-Executable Token" format:@"Attempt to execute a non-executable: %@", executable];

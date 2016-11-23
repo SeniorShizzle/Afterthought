@@ -41,7 +41,6 @@ static ExecutionStack *sharedInstance;
     if (self) {
         stack = [NSMutableArray arrayWithCapacity:30];
         currentIndex = -1;
-
     }
 
     return self;
@@ -100,6 +99,8 @@ static ExecutionStack *sharedInstance;
             case Executable:
                 // look up the executable in the dictionary stack
                 // and follow the commands in that stack
+                // or if it's not a literal or keyword, pop the referenced value onto the stack
+
 
                 @try {
                     runBlock = [dictStack blockForExecutable:token];
@@ -110,7 +111,6 @@ static ExecutionStack *sharedInstance;
                 } @catch (NSException *exception) {
                     NSLog(@"\n\n\n\tException Thrown By \'%@\':\n\t\t%@\n\n\nCurrent stack state: \n%@", token, exception, opStack);
                 }
-
 
                 break;
 

@@ -1,0 +1,4 @@
+/x 5 def
+/y 7 def
+x y add
+/z exch def
