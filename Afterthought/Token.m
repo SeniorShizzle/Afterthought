@@ -42,6 +42,9 @@
     return [[Token alloc] initWithType:Integer andValue:[NSNumber numberWithInteger:integer]];
 }
 
++ (Token *)tokenWithString:(NSString *)string {
+    return [[Token alloc] initWithType:String andValue:string];
+}
 
 
 # pragma mark - Private Initializers
@@ -177,6 +180,45 @@
 
 
 # pragma mark - Helper Methods
+
+- (NSComparisonResult)compareTo:(Token *)other {
+    // okay... we're going to have to decide the ordination between abritrary things
+
+    if (_tokenType != other.tokenType) return NSOrderedSame; // level the playing field
+
+    NSNumber *left;
+    NSNumber *right;
+
+    NSString *leftS;
+    NSString *rightS;
+
+    switch (other.tokenType) {
+        case Block:
+        case Executable:
+        case Literal:
+        case Array:
+        case Bool:
+        case Dictionary:
+        case Mark:
+            return NSOrderedSame;
+
+        case Integer:
+        case Real:
+
+            left  = (NSNumber *)_value;
+            right = (NSNumber *)other.value;
+
+            return left > right ? NSOrderedAscending : NSOrderedDescending;
+
+        case String:
+
+            leftS = (NSString *)_value;
+            rightS = (NSString *)other.value;
+
+            return [leftS compare:rightS];
+    }
+
+}
 
 - (BOOL)isEqual:(id)object {
     if ([object class] != [self class]) return NO;

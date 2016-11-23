@@ -34,7 +34,10 @@ typedef NS_ENUM(NSInteger, TokenType){
 + (Token *) tokenWithReal:(NSNumber *)real;
 + (Token *) tokenWithBool:(bool)boolean;
 + (Token *) tokenWithExecutable:(NSString *)executable;
++ (Token *) tokenWithString:(NSString *)string;
 
 + (NSString *) tokenTypeString:(TokenType)type;
+
+- (NSComparisonResult) compareTo:(Token *)other;
 
 @end

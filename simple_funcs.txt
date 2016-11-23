@@ -1,8 +1,12 @@
 180 cos % expects -1
 
+45 cos % expects 0.7071...
+
 5 sqrt
 
 3.4 ceiling
+
+3 ceiling
 
 3.4 floor
 
@@ -11,3 +15,8 @@
 5 truncate % expects 5 (integer)
 
 5.3 truncate % expects 5.0 (real)
+
+-5 0 atan % expects 270.0
+
+rand
+

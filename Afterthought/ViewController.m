@@ -34,7 +34,7 @@
 
     parser = [[Tokenizer alloc] init];
 
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"simple_funcs"
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"string_funcs"
                                                      ofType:@"txt"];
 
     [parser loadFile:file];
