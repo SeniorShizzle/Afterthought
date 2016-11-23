@@ -23,6 +23,7 @@ typedef void (^SystemExecutionBlock)(void);
 
 - (SystemExecutionBlock) blockForExecutable:(Token *) executable;
 
-- (bool) isLanguageObject:(Token *)token;
+- (Token *) tokenForKey:(Token *)key;
+
 
 @end

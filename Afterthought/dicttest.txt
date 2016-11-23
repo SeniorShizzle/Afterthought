@@ -2,3 +2,16 @@
 /y 7 def
 x y add
 /z exch def
+x y z
+(Trying something cool)
+
+/factorial
+% a factorial a!
+{
+    dup dup 1 sub -1 0 {
+        mul
+    } for
+
+} def
+
+10 factorial

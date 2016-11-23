@@ -501,8 +501,8 @@
         Token *a = [opStack pop];
         Token *b = [opStack pop];
 
-        [opStack pushToken:b];
         [opStack pushToken:a];
+        [opStack pushToken:b];
     }];
 
 

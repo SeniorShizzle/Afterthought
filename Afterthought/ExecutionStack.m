@@ -17,6 +17,7 @@
 
     OperandStack *opStack;
     DictionaryStack *dictStack;
+    ExecutionStack *execStack;
 
     bool paused;
 
@@ -72,6 +73,7 @@ static ExecutionStack *sharedInstance;
     /// Initialize and grab the other main stacks
     dictStack = [DictionaryStack getInstance];
     opStack = [OperandStack getInstance];
+    execStack = [ExecutionStack getInstance];
 
     paused = false;
 
@@ -101,18 +103,39 @@ static ExecutionStack *sharedInstance;
                 // and follow the commands in that stack
                 // or if it's not a literal or keyword, pop the referenced value onto the stack
 
-
+                /// First, let's try to locate it in our user dictionaries
                 @try {
-                    runBlock = [dictStack blockForExecutable:token];
+                    Token *returned = [dictStack tokenForKey:token];
 
-                    if (runBlock) {
-                        runBlock();
+                    /// If we found it in the user dictionaries
+                    if (returned) {
+
+                        if (returned.tokenType == Block) {
+                            Tokenizer *context = [[Tokenizer alloc] init];
+                            [context loadString:(NSString *)returned.value]; // load the code into the interpreter
+
+                            [execStack pushContext:context]; // load the new context onto execution stack
+                            [execStack run]; // begin execution of the code block immediately
+                        } else {
+                            [opStack pushToken:[returned copy]];
+                        }
+                    } else {
+
+                        /// Try to find it in the system dictionary
+                        runBlock = [dictStack blockForExecutable:token];
+
+                        if (runBlock) {
+                            runBlock();
+                        }
+                        
                     }
+
                 } @catch (NSException *exception) {
                     NSLog(@"\n\n\n\tException Thrown By \'%@\':\n\t\t%@\n\n\nCurrent stack state: \n%@", token, exception, opStack);
                 }
 
-                break;
+
+                break; // out of the switch statement
 
         }
 

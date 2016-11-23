@@ -48,6 +48,7 @@ static DictionaryStack *sharedInstance;
     return self;
 }
 
+
 - (void) setup {
     stack = [[NSMutableArray alloc] initWithCapacity:5];
 
@@ -67,7 +68,7 @@ static DictionaryStack *sharedInstance;
 
 # pragma mark - Dictionary Methods
 
-- (void)setToken:(Token *)value forKey:(Token *)key {
+- (void)setToken:(Token *) value forKey:(Token *)key {
 
     if (!stack) [self setup];
      
@@ -83,7 +84,27 @@ static DictionaryStack *sharedInstance;
     currentIndex++;
 }
 
-- (SystemExecutionBlock)blockForExecutable:(Token *)executable {
+
+- (Token *)tokenForKey:(Token *)key {
+
+    if (!stack) [self setup];
+
+    // Visit each dictionary in descending order (top-down), except the system dictionary
+    for (NSInteger i = currentIndex; i > 0; i--){
+        NSDictionary *currentDictionary = [stack objectAtIndex:i];
+
+        Token * returned = [currentDictionary objectForKey:key];
+
+        if (returned) return returned; // if the dictionary has the key, return it
+                                                 // otherwise try the next-lower dictionary
+    }
+
+    return NULL;
+
+}
+
+
+- (SystemExecutionBlock) blockForExecutable:(Token *)executable {
 
     if (!stack) [self setup];
 
@@ -92,19 +113,16 @@ static DictionaryStack *sharedInstance;
         [NSException raise:@"Illegal Operation on Non-Executable Token" format:@"Attempt to execute a non-executable: %@", executable];
     }
 
-    // Visit each dictionary in descending order (top-down)
-    for (NSInteger i = currentIndex; i >= 0; i--){
-        NSDictionary *currentDictionary = [stack objectAtIndex:i];
+    NSDictionary *systemDictionary = [stack firstObject];
 
-        SystemExecutionBlock returnedBlock = [currentDictionary objectForKey:executable];
+    SystemExecutionBlock returnedBlock = [systemDictionary objectForKey:executable];
 
-        if (returnedBlock) return returnedBlock; // if the dictionary has the key, return it
-                                                 // otherwise try the next-lower dictionary
-    }
+    if (returnedBlock) return returnedBlock; // if the dictionary has the key, return it
 
     [NSException raise:@"Undefined Symbol" format:@"Attempted to execute undefined symbol: %@", executable];
 
     return NULL;
 }
+
 
 @end
