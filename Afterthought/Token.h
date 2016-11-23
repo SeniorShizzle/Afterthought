@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, TokenType){
     Mark
 };
 
-@interface Token : NSObject {
+@interface Token : NSObject <NSCopying> {
 
 }
 
@@ -30,6 +30,11 @@ typedef NS_ENUM(NSInteger, TokenType){
 
 + (Token *) tokenFromString:(NSString *)string;
 + (Token *) mark;
++ (Token *) tokenWithInteger:(NSInteger)integer;
++ (Token *) tokenWithReal:(NSNumber *)real;
++ (Token *) tokenWithBool:(bool)boolean;
++ (Token *) tokenWithExecutable:(NSString *)executable;
+
 + (NSString *) tokenTypeString:(TokenType)type;
 
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Tokenizer.h"
 #import "OperandStack.h"
+#import "DictionaryStack.h"
 
 @interface ViewController : UIViewController
 

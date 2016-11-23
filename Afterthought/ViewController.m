@@ -10,8 +10,12 @@
 
 @interface ViewController () {
 
+    /// Interpreter Fields
     Tokenizer *parser;
+
+    /// Stacks
     OperandStack *operandStack;
+    DictionaryStack *dictionaryStack;
 
 }
 
@@ -24,16 +28,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
+    /// Set up the Stacks
     operandStack = [OperandStack getInstance];
+    dictionaryStack = [DictionaryStack getInstance];
 
     parser = [[Tokenizer alloc] init];
 
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"project_test_symbols"
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"simple_funcs"
                                                      ofType:@"txt"];
 
     [parser loadFile:file];
 
     Token *token = [parser nextToken];
+
+    SystemExecutionBlock runBlock;
 
     while (token){
 
@@ -45,6 +53,7 @@
             case Block:
             case Array:
             case String:
+            case Mark:
             case Dictionary:
                 [operandStack pushToken:token];
                 break;
@@ -52,6 +61,10 @@
             case Executable:
                 // look up the executable in the dictionary stack
                 // and follow the commands in that stack
+                runBlock = [dictionaryStack blockForExecutable:token];
+                if (runBlock) {
+                    runBlock();
+                }
                 break;
 
         }

@@ -15,25 +15,55 @@
 @synthesize tokenType = _tokenType;
 @synthesize value = _value;
 
+# pragma mark - Initializers 
 
 
-+ (Token *)mark {
++ (Token *) mark {
     return [[Token alloc] initMark];
 }
 
-
-+ (Token *)tokenFromString:(NSString *)string {
++ (Token *) tokenFromString:(NSString *)string {
     return [[Token alloc] initFromString:string];
 }
 
++ (Token *) tokenWithBool:(bool)boolean {
+    return [[Token alloc] initWithType:Bool andValue:[NSNumber numberWithBool:boolean]];
+}
+
++ (Token *) tokenWithReal:(NSNumber *)real {
+    return [[Token alloc] initWithType:Real andValue:real];
+}
+
++ (Token *) tokenWithExecutable:(NSString *)executable {
+    return [[Token alloc] initWithType:Executable andValue:executable];
+}
+
++ (Token *)tokenWithInteger:(NSInteger)integer {
+    return [[Token alloc] initWithType:Integer andValue:[NSNumber numberWithInteger:integer]];
+}
+
+
+
+# pragma mark - Private Initializers
 
 - (Token *) initMark{
     self = [super init];
 
     if (!self) return NULL;
 
-    _value = NULL;
+    _value = @"- mark -";
     _tokenType = Mark;
+
+    return self;
+}
+
+- (Token *) initWithType:(TokenType)type andValue:(NSObject *)value{
+    self = [super init];
+
+    if (!self) return NULL;
+
+    _value = value;
+    _tokenType = type;
 
     return self;
 }
@@ -90,6 +120,13 @@
         return self;
     }
 
+    if ([string compare:@"mark"] == NSOrderedSame){
+        _tokenType = Mark;
+        _value = @"- mark -";
+
+        return self;
+    }
+
     if ([string containsString:@"."]){
 
         /// Check for Reals
@@ -140,6 +177,22 @@
 
 
 # pragma mark - Helper Methods
+
+- (BOOL)isEqual:(id)object {
+    if ([object class] != [self class]) return NO;
+
+    Token *token = (Token *)object;
+
+    return token.tokenType == _tokenType && [token.value isEqual:_value];
+}
+
+- (NSUInteger)hash {
+    return _tokenType;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    return [[Token alloc] initWithType:_tokenType andValue:[_value copy]];
+}
 
 - (NSString *) description {
     NSString *retString = [_value description]; //[NSString stringWithFormat:@"%@", [_value description], [Token tokenTypeString:_tokenType]];

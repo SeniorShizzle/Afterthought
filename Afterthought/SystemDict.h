@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Token.h"
 
 @interface SystemDict : NSObject
+
++ (NSDictionary *) systemDictionary;
 
 @end

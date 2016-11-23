@@ -29,7 +29,7 @@ static OperandStack *instance;
     self = [super init];
     if (self) {
         stack = [NSMutableArray arrayWithCapacity:1024]; // initial capacity for performance reasons
-        currentIndex = 0;
+        currentIndex = -1;
     }
     return self;
 }
@@ -52,20 +52,19 @@ static OperandStack *instance;
 # pragma mark - Stack Methods
 
 - (Token *) peek {
-
-    return stack[currentIndex];
+    return [stack lastObject];
 }
 
 - (NSInteger)size {
-    return currentIndex;
+    return currentIndex + 1;
 }
 
 - (Token *)pop {
-    if (currentIndex == 0) {
+    if (currentIndex < 0) {
         [NSException raise:@"Stack Underflow" format:@"Execution attempted to pop from an empty stack"];
     }
 
-    Token *top = stack[currentIndex];
+    Token *top = [stack lastObject];
     [stack removeLastObject];
     currentIndex--;
 
@@ -77,6 +76,40 @@ static OperandStack *instance;
     [stack addObject:token];
     currentIndex++;
 
+}
+
+- (void) rollLast:(NSInteger)objectCount by:(NSInteger)spaceCount {
+
+    if (objectCount > currentIndex + 1){
+        [NSException raise:@"Stack Underflow" format:@"Attempted to rotate %ld stack objects but there were only %ld", (long)objectCount, currentIndex];
+    }
+
+    spaceCount %= objectCount; // handle pesky input where the rolls are greater than the count to roll
+
+    NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:objectCount]; // temporary array
+    NSInteger baseIndex = currentIndex - objectCount + 1;
+
+    for (NSInteger count = 0; count < objectCount; count++) {
+
+        NSInteger nextIndex = baseIndex + (objectCount - spaceCount + count) % objectCount; // handle wrapping
+
+        Token *item = [stack objectAtIndex:nextIndex];
+        [tempArray addObject:item];
+
+    }
+
+    [stack replaceObjectsInRange:NSMakeRange(baseIndex, objectCount) withObjectsFromArray:tempArray];
+
+}
+
+- (void) clearStack {
+    [stack removeAllObjects];
+    currentIndex = -1;
+}
+
+- (bool)containsMark {
+
+    return [stack containsObject:[Token mark]];
 }
 
 
@@ -99,9 +132,9 @@ static OperandStack *instance;
 - (NSString *)description {
     NSMutableString *retString = [[NSMutableString alloc] init];
 
-    [retString appendString:@"##### TOP #####\n\n"];
+    [retString appendString:@"\n##### TOP #####\n\n"];
 
-    for (int i = (int)currentIndex - 1; i >= 0; i--) {
+    for (int i = (int)currentIndex ; i >= 0; i--) {
         [retString appendString:[NSString stringWithFormat:@"\t%@\n", [stack objectAtIndex:i]]];
     }
 

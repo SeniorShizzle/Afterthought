@@ -19,6 +19,9 @@
 - (void)pushToken:(Token *)token;
 - (NSInteger)size;
 - (Token *)tokenAtPosition:(NSInteger)index;
+- (void)rollLast:(NSInteger)objectCount by:(NSInteger)spaceCount;
+- (void)clearStack;
+- (bool)containsMark;
 
 
 @end
