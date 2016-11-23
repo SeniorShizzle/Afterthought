@@ -12,6 +12,8 @@
 @interface Tokenizer : NSObject
 
 - (void) loadFile:(NSString *)filePath;
+- (void) loadString:(NSString *)string;
+- (void) loadBlockInToken:(Token *)token;
 
 - (Token *) nextToken;
 

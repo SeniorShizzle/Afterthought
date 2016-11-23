@@ -18,6 +18,7 @@
 		5B7B80661DE4DFE200E106ED /* simple_calc.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80651DE4DFE200E106ED /* simple_calc.txt */; };
 		5B7B80681DE5433900E106ED /* simple_funcs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80671DE5433900E106ED /* simple_funcs.txt */; };
 		5B7B806A1DE5517F00E106ED /* string_funcs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80691DE5517F00E106ED /* string_funcs.txt */; };
+		5B7B806D1DE563E000E106ED /* ExecutionStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7B806C1DE563E000E106ED /* ExecutionStack.m */; };
 		5BAC5D011DE2B0E400BF6268 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D001DE2B0E400BF6268 /* main.m */; };
 		5BAC5D041DE2B0E400BF6268 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D031DE2B0E400BF6268 /* AppDelegate.m */; };
 		5BAC5D071DE2B0E400BF6268 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D061DE2B0E400BF6268 /* ViewController.m */; };
@@ -54,6 +55,8 @@
 		5B7B80651DE4DFE200E106ED /* simple_calc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simple_calc.txt; sourceTree = "<group>"; };
 		5B7B80671DE5433900E106ED /* simple_funcs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = simple_funcs.txt; path = ../simple_funcs.txt; sourceTree = "<group>"; };
 		5B7B80691DE5517F00E106ED /* string_funcs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = string_funcs.txt; path = ../string_funcs.txt; sourceTree = "<group>"; };
+		5B7B806B1DE563E000E106ED /* ExecutionStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionStack.h; sourceTree = "<group>"; };
+		5B7B806C1DE563E000E106ED /* ExecutionStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionStack.m; sourceTree = "<group>"; };
 		5BAC5CFC1DE2B0E400BF6268 /* Afterthought.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Afterthought.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAC5D001DE2B0E400BF6268 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5BAC5D021DE2B0E400BF6268 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 				5B29DCA51DE368CE002FDE84 /* DictionaryStack.m */,
 				5B29DCA71DE36B35002FDE84 /* SystemDict.h */,
 				5B29DCA81DE36B35002FDE84 /* SystemDict.m */,
+				5B7B806B1DE563E000E106ED /* ExecutionStack.h */,
+				5B7B806C1DE563E000E106ED /* ExecutionStack.m */,
 				5B29DC9D1DE2C2B7002FDE84 /* Tokenizer.h */,
 				5B29DC9E1DE2C2B7002FDE84 /* Tokenizer.m */,
 				5B29DC9A1DE2BD1B002FDE84 /* Token.h */,
@@ -266,6 +271,7 @@
 			files = (
 				5B29DCA91DE36B35002FDE84 /* SystemDict.m in Sources */,
 				5B29DC991DE2BCA5002FDE84 /* OperandStack.m in Sources */,
+				5B7B806D1DE563E000E106ED /* ExecutionStack.m in Sources */,
 				5B29DC9C1DE2BD1B002FDE84 /* Token.m in Sources */,
 				5BAC5D071DE2B0E400BF6268 /* ViewController.m in Sources */,
 				5B29DC9F1DE2C2B7002FDE84 /* Tokenizer.m in Sources */,

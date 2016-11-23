@@ -725,9 +725,6 @@
     }];
 
 
-    //TODO: Implement the remaining String Operators
-
-
 # pragma mark - Bit and Boolean Operators
 
     /// EQ
@@ -850,6 +847,7 @@
         [opStack pushToken:ret];
         
     }];
+
 
     /// LT
     // a b lt bool
@@ -1058,7 +1056,7 @@
     // - exit -
     [keys addObject:[Token tokenFromString:@"exit"]];
     [blocks addObject:^{
-        // TODO: Exit the innermost loop
+        //TODO: Exit the innermost loop
     }];
 
 

@@ -15,6 +15,7 @@
 
 }
 
+# pragma mark - Setup Methods
 
 - (void) loadFile:(NSString *)filePath {
 
@@ -31,6 +32,25 @@
 
     filePosition = 0;
 }
+
+- (void) loadString:(NSString *)string {
+
+    fileText = string;
+    filePosition = 0;
+
+}
+
+- (void) loadBlockInToken:(Token *)token {
+    if (token.tokenType != Block) {
+        [NSException raise:@"Illegal Executable Type" format:@"Attempted to parse a non-block literal"];
+    }
+
+    fileText = (NSString *)token.value;
+
+    filePosition = 0;
+}
+
+# pragma mark - Tokenizer
 
 - (Token *) nextToken {
     if (!fileText || filePosition >= [fileText length]) return NULL;
