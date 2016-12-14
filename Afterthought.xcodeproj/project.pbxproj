@@ -22,6 +22,9 @@
 		5B7B806F1DE572BB00E106ED /* flowcontrol.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B806E1DE572BB00E106ED /* flowcontrol.txt */; };
 		5B7B80711DE5915F00E106ED /* dicttest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80701DE5915F00E106ED /* dicttest.txt */; };
 		5B7B80731DE5A11C00E106ED /* Afterthought-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80721DE5A11C00E106ED /* Afterthought-Logo.png */; };
+		5B7B80751DE6048300E106ED /* project_test_standev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80741DE6048300E106ED /* project_test_standev.txt */; };
+		5B7B80771DE605DD00E106ED /* project_test_standev02.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80761DE605DD00E106ED /* project_test_standev02.txt */; };
+		5B7B80791DE60F2B00E106ED /* bubblesort.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B80781DE60F2B00E106ED /* bubblesort.txt */; };
 		5BAC5D011DE2B0E400BF6268 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D001DE2B0E400BF6268 /* main.m */; };
 		5BAC5D041DE2B0E400BF6268 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D031DE2B0E400BF6268 /* AppDelegate.m */; };
 		5BAC5D071DE2B0E400BF6268 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D061DE2B0E400BF6268 /* ViewController.m */; };
@@ -29,6 +32,7 @@
 		5BAC5D0C1DE2B0E400BF6268 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BAC5D0B1DE2B0E400BF6268 /* Assets.xcassets */; };
 		5BAC5D0F1DE2B0E400BF6268 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAC5D0D1DE2B0E400BF6268 /* LaunchScreen.storyboard */; };
 		5BAC5D1A1DE2B0E400BF6268 /* AfterthoughtTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC5D191DE2B0E400BF6268 /* AfterthoughtTests.m */; };
+		5BDDAC661E013BA2000CC5F0 /* GraphicsStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDAC651E013BA2000CC5F0 /* GraphicsStack.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +67,9 @@
 		5B7B806E1DE572BB00E106ED /* flowcontrol.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flowcontrol.txt; sourceTree = "<group>"; };
 		5B7B80701DE5915F00E106ED /* dicttest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dicttest.txt; sourceTree = "<group>"; };
 		5B7B80721DE5A11C00E106ED /* Afterthought-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Afterthought-Logo.png"; sourceTree = SOURCE_ROOT; };
+		5B7B80741DE6048300E106ED /* project_test_standev.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = project_test_standev.txt; sourceTree = "<group>"; };
+		5B7B80761DE605DD00E106ED /* project_test_standev02.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = project_test_standev02.txt; sourceTree = "<group>"; };
+		5B7B80781DE60F2B00E106ED /* bubblesort.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bubblesort.txt; sourceTree = "<group>"; };
 		5BAC5CFC1DE2B0E400BF6268 /* Afterthought.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Afterthought.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAC5D001DE2B0E400BF6268 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5BAC5D021DE2B0E400BF6268 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,6 +83,8 @@
 		5BAC5D151DE2B0E400BF6268 /* AfterthoughtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AfterthoughtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAC5D191DE2B0E400BF6268 /* AfterthoughtTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AfterthoughtTests.m; sourceTree = "<group>"; };
 		5BAC5D1B1DE2B0E400BF6268 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BDDAC641E013BA2000CC5F0 /* GraphicsStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsStack.h; sourceTree = "<group>"; };
+		5BDDAC651E013BA2000CC5F0 /* GraphicsStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphicsStack.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,10 +134,13 @@
 				5B29DC981DE2BCA5002FDE84 /* OperandStack.m */,
 				5B29DCA41DE368CE002FDE84 /* DictionaryStack.h */,
 				5B29DCA51DE368CE002FDE84 /* DictionaryStack.m */,
-				5B29DCA71DE36B35002FDE84 /* SystemDict.h */,
-				5B29DCA81DE36B35002FDE84 /* SystemDict.m */,
+				5BDDAC641E013BA2000CC5F0 /* GraphicsStack.h */,
+				5BDDAC651E013BA2000CC5F0 /* GraphicsStack.m */,
 				5B7B806B1DE563E000E106ED /* ExecutionStack.h */,
 				5B7B806C1DE563E000E106ED /* ExecutionStack.m */,
+				5B29DCA71DE36B35002FDE84 /* SystemDict.h */,
+				5B29DCA81DE36B35002FDE84 /* SystemDict.m */,
+				5B7B80781DE60F2B00E106ED /* bubblesort.txt */,
 				5B29DC9D1DE2C2B7002FDE84 /* Tokenizer.h */,
 				5B29DC9E1DE2C2B7002FDE84 /* Tokenizer.m */,
 				5B29DC9A1DE2BD1B002FDE84 /* Token.h */,
@@ -145,6 +157,8 @@
 		5BAC5CFF1DE2B0E400BF6268 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B7B80761DE605DD00E106ED /* project_test_standev02.txt */,
+				5B7B80741DE6048300E106ED /* project_test_standev.txt */,
 				5B7B80721DE5A11C00E106ED /* Afterthought-Logo.png */,
 				5B7B80691DE5517F00E106ED /* string_funcs.txt */,
 				5B7B80671DE5433900E106ED /* simple_funcs.txt */,
@@ -254,13 +268,16 @@
 			files = (
 				5BAC5D0F1DE2B0E400BF6268 /* LaunchScreen.storyboard in Resources */,
 				5BAC5D0C1DE2B0E400BF6268 /* Assets.xcassets in Resources */,
+				5B7B80791DE60F2B00E106ED /* bubblesort.txt in Resources */,
 				5B7B80661DE4DFE200E106ED /* simple_calc.txt in Resources */,
 				5B29DCA31DE2EDFD002FDE84 /* project_test_symbols.txt in Resources */,
 				5B7B80681DE5433900E106ED /* simple_funcs.txt in Resources */,
 				5B29DC961DE2BA46002FDE84 /* project_test_quadratic.txt in Resources */,
+				5B7B80771DE605DD00E106ED /* project_test_standev02.txt in Resources */,
 				5B7B80711DE5915F00E106ED /* dicttest.txt in Resources */,
 				5B7B80731DE5A11C00E106ED /* Afterthought-Logo.png in Resources */,
 				5B7B806F1DE572BB00E106ED /* flowcontrol.txt in Resources */,
+				5B7B80751DE6048300E106ED /* project_test_standev.txt in Resources */,
 				5B7B806A1DE5517F00E106ED /* string_funcs.txt in Resources */,
 				5BAC5D0A1DE2B0E400BF6268 /* Main.storyboard in Resources */,
 				5B29DC941DE2BA3F002FDE84 /* project_rpn.txt in Resources */,
@@ -282,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B29DCA91DE36B35002FDE84 /* SystemDict.m in Sources */,
+				5BDDAC661E013BA2000CC5F0 /* GraphicsStack.m in Sources */,
 				5B29DC991DE2BCA5002FDE84 /* OperandStack.m in Sources */,
 				5B7B806D1DE563E000E106ED /* ExecutionStack.m in Sources */,
 				5B29DC9C1DE2BD1B002FDE84 /* Token.m in Sources */,

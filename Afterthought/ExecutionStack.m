@@ -127,16 +127,14 @@ static ExecutionStack *sharedInstance;
                         if (runBlock) {
                             runBlock();
                         }
-                        
+
                     }
 
                 } @catch (NSException *exception) {
                     NSLog(@"\n\n\n\tException Thrown By \'%@\':\n\t\t%@\n\n\nCurrent stack state: \n%@", token, exception, opStack);
                 }
 
-
                 break; // out of the switch statement
-
         }
 
         if (paused) break; // will have to be resumed manually by calling -run

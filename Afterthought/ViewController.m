@@ -34,7 +34,7 @@
 
     parser = [[Tokenizer alloc] init];
 
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"project_test_quadratic"
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"project_test_standev"
                                                      ofType:@"txt"];
 
     [parser loadFile:file];

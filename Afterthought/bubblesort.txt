@@ -1,0 +1,23 @@
+
+
+/bubblesort
+% z ... a n bubblesort a ... z
+% works for integers and strings
+{
+    /n exch def % define n
+    /hasswapped false def
+    
+    1 1 n 1 add {
+        dup dup
+        index % copies the ith value (i from loop)
+        2 add index % grab the next lowest thing
+        
+        
+        
+        
+    } for
+    
+    
+    
+
+} def
